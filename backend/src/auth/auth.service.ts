@@ -1,36 +1,38 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcryptjs';
+import * as bcrypt from 'bcrypt';
 import { UsersService } from '../users/users.service';
+import { CreateUser, User } from 'src/interface/user';
 
 @Injectable()
 export class AuthService {
   constructor(
+    private usersService: UsersService,
     private jwtService: JwtService,
-    private usersService: UsersService
   ) {}
 
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.usersService.findByUsername(username);
-    if (user && await bcrypt.compare(pass, user.password)) {
-      const { password, ...result } = user;
-      return result;
-    }
-    return null;
+  async register(userData: CreateUser) {
+    const hash = bcrypt.hash(userData.password, 10) as string;
+    const user = await this.usersService.create({
+      ...userData,
+      password: hash,
+    });
+    return this.login(user); // Auto login after registration
   }
 
-  async login(user: any) {
-    const payload = { username: user.username, sub: user.id };
+  login(user: User) {
+    const payload = { sub: user.id, email: user.email };
     return {
       access_token: this.jwtService.sign(payload),
+      user: { id: user.id, name: user.name, email: user.email },
     };
   }
 
-  async register(username: string, password: string) {
-    const existing = await this.usersService.findByUsername(username);
-    if (existing) throw new UnauthorizedException('User already exists');
-    const hash = await bcrypt.hash(password, 10);
-    const newUser = await this.usersService.create({ username, password: hash });
-    return this.login(newUser);
+  async validateUser(email: string, password: string) {
+    const user = await this.usersService.findByEmail(email);
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+    return user;
   }
 }

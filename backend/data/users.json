@@ -1,12 +1,27 @@
 [
   {
     "id": 1,
-    "username": "admin",
+    "name": "Hannan",
+    "email": "admin@123",
     "password": "$2a$10$JXy/F2I3ufQ6ZCtj3OEUe.dU2AhgDb.GnkFkpnTZQwEAmCgGgYmSm"
   },
   {
     "id": 1753186740577,
-    "username": "hannan",
+    "email": "hannan@admin.com",
     "password": "$2b$10$o4nREbh3K6oJ/0MHCeXm..RN7YAu5FJh9UbZayr4SwkIU9r8eSBjO"
+  },
+  {
+    "id": 1753355294181,
+    "name": "hannan",
+    "email": "hannan123@gmail.com",
+    "phone": "+9212341234123",
+    "password": "$2b$10$ve/3Hjo/jH1rPEUaGn5c0O8K1g8nxBqBheRIP80W6qMVEXk7I6bkO"
+  },
+  {
+    "id": 1753356281651,
+    "name": "Hannan",
+    "email": "hannan@test.com",
+    "phone": "+923134123",
+    "password": "$2b$10$x00Npob2jCkBiR63wO9O3ueQtmSgjuj8U9z.8uE2v2JtaUlWaAx6u"
   }
 ]

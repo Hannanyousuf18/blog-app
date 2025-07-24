@@ -10,7 +10,7 @@ export class FileStorageService<T> {
 
   async read(): Promise<T[]> {
     const content = await fs.readFile(this.filePath, 'utf-8');
-    return JSON.parse(content);
+    return JSON.parse(content) as T[];
   }
 
   async write(data: T[]): Promise<void> {
