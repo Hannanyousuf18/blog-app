@@ -1,0 +1,11 @@
+<ag-grid-angular
+  class="ag-theme-alpine h-96"
+  [defaultColDef]="defaultColDef"
+  [columnDefs]="columnDefs"
+  [rowData]="posts"
+  [pagination]="true"
+  [paginationPageSize]="20"
+  [theme]="theme"
+  (rowClicked)="onRowClicked($event)"
+>
+</ag-grid-angular>

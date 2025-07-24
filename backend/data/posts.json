@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "title": "Welcome",
+    "body": "This is your first blog post.",
+    "authorId": 1,
+    "publishedAt": "2025-07-22T12:00:00.000Z"
+  }
+]
